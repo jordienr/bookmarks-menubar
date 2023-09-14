@@ -12,6 +12,7 @@ import { EditBookmark } from '@/pages/bookmarks/edit';
 import 'tailwindcss/tailwind.css';
 import { EditFolder } from '@/pages/folders/edit';
 import { ViewFolder } from '@/pages/folders/view';
+import { DeleteFolder } from '@/pages/folders/delete';
 
 export default function App() {
   const queryClient = new QueryClient({
@@ -29,11 +30,12 @@ export default function App() {
         <Routes>
           <Route index element={<Start />} />
           <Route path="bookmarks" element={<Start />}>
-            <Route path="create" element={<CreateBookmark />} />
             <Route path=":id/edit" element={<EditBookmark />} />
           </Route>
+          <Route path="bookmarks/create" element={<CreateBookmark />} />
           <Route path="folders/:id" element={<ViewFolder />} />
           <Route path="folders/:id/edit" element={<EditFolder />} />
+          <Route path="folders/:id/delete" element={<DeleteFolder />} />
           <Route path="settings" element={<Settings />} />
           <Route path="about" element={<About />} />
         </Routes>

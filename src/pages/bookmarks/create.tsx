@@ -22,6 +22,7 @@ export function CreateBookmark() {
       id: createId(),
       title,
       url,
+      order: store.bookmarks.length,
     });
 
     store.setPastedURL('');

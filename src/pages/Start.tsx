@@ -54,6 +54,7 @@ export function Start() {
     store.createFolder({
       id: createId(),
       title: 'New Folder',
+      order: store.folders.length,
     });
   }
 
@@ -72,13 +73,13 @@ export function Start() {
           </Button>
         </div>
       </div>
-      <div className="mt-3 flex flex-col gap-1">
+      <div className="mt-3 flex flex-col">
         {/* <Debug data={store.bookmarks} /> */}
         {store.folders.map((folder) => (
           <Link
             to={`/folders/${folder.id}`}
             key={folder.id}
-            className="group flex py-2 gap-2 hover:bg-slate-50 px-3 items-center"
+            className="group flex py-1 gap-2 hover:bg-slate-50 px-3 items-center"
           >
             <div className="px-1">
               <Folder size="18" />
@@ -100,14 +101,14 @@ export function Start() {
                 <DropdownMenuItem asChild>
                   <Link to={`/folders/${folder.id}/edit`}>Edit</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span>Delete</span>
+                <DropdownMenuItem asChild>
+                  <Link to={`/folders/${folder.id}/delete`}>Delete</Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </Link>
         ))}
-        {store.bookmarks.map((bookmark) => (
+        {store.getOrphanBookmarks().map((bookmark) => (
           <Link
             target="_blank"
             to={bookmark.url}

@@ -10,13 +10,11 @@ export function CreateBookmark() {
   const store = useMainStore();
   const navigate = useNavigate();
 
+  const [title, setTitle] = React.useState('');
+  const [url, setURL] = React.useState(store.pastedURL || '');
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const title = (
-      e.currentTarget.elements.namedItem('title') as HTMLInputElement
-    ).value;
-    const url = (e.currentTarget.elements.namedItem('url') as HTMLInputElement)
-      .value;
 
     console.log({ title, url });
 
@@ -37,17 +35,26 @@ export function CreateBookmark() {
       <form className="mt-4 flex flex-col gap-4" onSubmit={handleSubmit}>
         <div>
           <Label htmlFor="title">Title</Label>
-          <Input autoFocus id="title" placeholder="Name" />
+          <Input
+            autoFocus
+            onChange={(e) => setTitle(e.target.value)}
+            id="title"
+            placeholder="Name"
+          />
         </div>
         <div>
           <Label htmlFor="url">URL</Label>
           <Input
             value={store.pastedURL || ''}
             id="url"
+            onChange={(e) => setURL(e.target.value)}
             placeholder="https://example.com"
           />
         </div>
         <div className="actions">
+          <Button variant="ghost" onClick={() => navigate('/')}>
+            Cancel
+          </Button>
           <Button type="submit">Add bookmark</Button>
         </div>
       </form>

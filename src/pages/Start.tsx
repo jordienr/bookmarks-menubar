@@ -19,14 +19,23 @@ export function Start() {
 
   useEffect(() => {
     console.log(window);
-    window.electron.ipcRenderer.on('paste', (e: unknown) => {
-      console.log(e);
-      if (typeof e !== 'string') return;
-      if (isURL(e)) {
-        store.setPastedURL(e);
+
+    // on cmd v
+
+    window.addEventListener('paste', (e) => {
+      const text = e.clipboardData?.getData('text/plain');
+
+      if (!text) return;
+
+      if (isURL(text)) {
+        store.setPastedURL(text);
         navigate('/bookmarks/create');
+      } else {
+        console.log('not a url');
       }
     });
+
+    return window.removeEventListener('paste', () => {});
   }, [navigate, store]);
 
   function handleDelete(bookmark: any) {

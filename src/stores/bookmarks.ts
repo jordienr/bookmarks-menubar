@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-type Bookmark = {
+export type Bookmark = {
   id: string;
   title: string;
   url: string;
@@ -9,7 +9,7 @@ type Bookmark = {
   order: number;
 };
 
-type Folder = {
+export type Folder = {
   id: string;
   title: string;
   parentFolderId?: string;

@@ -19,6 +19,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { FolderItem } from '@/components/FolderItem';
 
 export function Start() {
   const store = useMainStore();
@@ -76,37 +77,7 @@ export function Start() {
       <div className="mt-3 flex flex-col">
         {/* <Debug data={store.bookmarks} /> */}
         {store.folders.map((folder) => (
-          <Link
-            to={`/folders/${folder.id}`}
-            key={folder.id}
-            className="group flex py-1 gap-2 hover:bg-slate-50 px-3 items-center"
-          >
-            <div className="px-1">
-              <Folder size="18" />
-            </div>
-            <div>
-              <span>{folder.title}</span>
-            </div>
-
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                asChild
-                className="ml-auto opacity-0 group-hover:opacity-100 transition-all"
-              >
-                <Button size="icon" variant="ghost" className="text-slate-400">
-                  <MoreVertical size="18" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="mr-2">
-                <DropdownMenuItem asChild>
-                  <Link to={`/folders/${folder.id}/edit`}>Edit</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to={`/folders/${folder.id}/delete`}>Delete</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </Link>
+          <FolderItem key={folder.id} folder={folder} />
         ))}
         {store.getOrphanBookmarks().map((bookmark) => (
           <Link

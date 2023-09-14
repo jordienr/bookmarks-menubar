@@ -1,15 +1,12 @@
-import {
-  MemoryRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from 'react-router-dom';
+import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import { Deployments } from 'src/pages/Deployments';
+import { CreateBookmark } from '@/pages/bookmarks/create';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { About } from '@/pages/About';
 import { Toaster } from 'sonner';
 import { Start } from '@/pages/Start';
+import { useEffect } from 'react';
+import { isURL } from '@/lib/utils';
 import { Settings } from '../pages/Settings';
 import 'tailwindcss/tailwind.css';
 
@@ -28,8 +25,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Start />} />
-          <Route path="/deployments" element={<Deployments />} />
-          <Route path="/deployments/:teamId" element={<Deployments />} />
+          <Route path="/bookmarks/create" element={<CreateBookmark />} />
           <Route path="/Settings" element={<Settings />} />
           <Route path="/about" element={<About />} />
         </Routes>

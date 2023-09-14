@@ -9,7 +9,16 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain, Tray, Menu } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  shell,
+  ipcMain,
+  Tray,
+  Menu,
+  globalShortcut,
+  clipboard,
+} from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -172,14 +181,35 @@ app
               app.quit();
             },
           },
+          {
+            label: 'Paste',
+            accelerator: 'CommandOrControl+V',
+            click: () => {
+              const clipboardText = clipboard.readText();
+              mainWindow?.webContents.send('paste', clipboardText);
+              console.log('Pasted: ', clipboardText);
+            },
+          },
         ])
       );
+
+      // Handle paste event
     });
-    createWindow();
+
+    // ipcMain.on('paste', (event) => {
+    //   console.log(event);
+
+    //   const clipboardText = clipboard.readText();
+    //   mainWindow?.webContents.send('paste', clipboardText);
+    //   console.log('Pasted: ', clipboardText);
+    // });
+
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
       if (mainWindow === null) createWindow();
     });
+
+    createWindow();
   })
   .catch(console.log);

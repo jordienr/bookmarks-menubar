@@ -6,6 +6,10 @@
   -webkit-app-region: drag;
 }
 
+.actions {
+  @apply flex items-center justify-end gap-2;
+}
+
 body {
   -webkit-user-select: none;
 }

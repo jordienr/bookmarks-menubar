@@ -35,13 +35,15 @@ export function Start() {
 
   return (
     <div className="text-sm">
-      <div className="flex px-3 py-1 justify-between items-center border-b">
-        <h1 className="draggable-area">Bookmarks</h1>
-        <Button variant="ghost" size="icon">
-          <Link to="/bookmarks/create">
-            <Plus size="20" />
-          </Link>
-        </Button>
+      <div className="flex justify-between items-center border-b">
+        <h1 className="draggable-area flex-grow px-3 py-1">Bookmarks</h1>
+        <div className="pr-3 py-1">
+          <Button variant="ghost" size="icon">
+            <Link to="/bookmarks/create">
+              <Plus size="20" />
+            </Link>
+          </Button>
+        </div>
       </div>
       <div className="mt-3 flex flex-col gap-1">
         {/* <Debug data={store.bookmarks} /> */}
@@ -63,7 +65,9 @@ export function Start() {
             </div>
             <div className="flex flex-col">
               <span>{bookmark.title}</span>
-              <span className="text-sm text-gray-400">{bookmark.url}</span>
+              <span className="text-xs tracking-tighter font-mono text-gray-400">
+                {bookmark.url}
+              </span>
             </div>
             <div className="ml-auto flex items-center">
               <DropdownMenu>

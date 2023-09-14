@@ -10,13 +10,14 @@ type Bookmark = {
 
 type Folder = {
   id: string;
-  label: string;
+  title: string;
   parentFolderId?: string;
 };
 
 interface MainStore {
   bookmarks: Bookmark[];
   folders: Folder[];
+  createFolder: (f: Folder) => void;
   pastedURL?: string;
   setPastedURL: (url: string) => void;
   addBookmark: (b: Bookmark) => void;
@@ -42,6 +43,11 @@ export const useMainStore = create<MainStore>()(
       removeBookmark: (b) => {
         set((state) => ({
           bookmarks: state.bookmarks.filter((bookmark) => bookmark.id !== b.id),
+        }));
+      },
+      createFolder: (f) => {
+        set((state) => ({
+          folders: [...state.folders, f],
         }));
       },
     }),

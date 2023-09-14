@@ -5,10 +5,13 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { About } from '@/pages/About';
 import { Toaster } from 'sonner';
 import { Start } from '@/pages/Start';
+import { Settings } from '../pages/Settings';
 import { useEffect } from 'react';
 import { isURL } from '@/lib/utils';
-import { Settings } from '../pages/Settings';
+import { EditBookmark } from '@/pages/bookmarks/edit';
 import 'tailwindcss/tailwind.css';
+import { EditFolder } from '@/pages/folders/edit';
+import { ViewFolder } from '@/pages/folders/view';
 
 export default function App() {
   const queryClient = new QueryClient({
@@ -24,10 +27,15 @@ export default function App() {
       <Toaster />
       <Router>
         <Routes>
-          <Route path="/" element={<Start />} />
-          <Route path="/bookmarks/create" element={<CreateBookmark />} />
-          <Route path="/Settings" element={<Settings />} />
-          <Route path="/about" element={<About />} />
+          <Route index element={<Start />} />
+          <Route path="bookmarks" element={<Start />}>
+            <Route path="create" element={<CreateBookmark />} />
+            <Route path=":id/edit" element={<EditBookmark />} />
+          </Route>
+          <Route path="folders/:id" element={<ViewFolder />} />
+          <Route path="folders/:id/edit" element={<EditFolder />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="about" element={<About />} />
         </Routes>
       </Router>
     </QueryClientProvider>

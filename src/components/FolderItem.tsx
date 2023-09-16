@@ -48,15 +48,27 @@ export function FolderItem({ folder }: { folder: Folder }) {
   };
 
   return (
-    <span ref={setDroppableRef}>
+    <div
+      className="group flex items-center pr-2 py-1 hover:bg-slate-50/90"
+      ref={setDroppableRef}
+    >
+      <button
+        type="button"
+        className="text-slate-400 cursor-move opacity-0 group-hover:opacity-100 transition-opacity"
+        {...listeners}
+        {...attributes}
+      >
+        <GripVertical size="18" />
+      </button>
+
       <Link
         ref={setNodeRef}
         to={`/folders/${folder.id}`}
         style={style}
         key={folder.id}
-        className="group flex py-1 gap-2 hover:bg-slate-50 px-3 items-center"
+        className="flex items-center w-full"
       >
-        <div className="px-1">
+        <div className="mr-2 h-7 w-7 rounded-full text-yellow-500 flex items-center justify-center">
           <FolderIcon size="18" />
         </div>
         <div>
@@ -81,10 +93,7 @@ export function FolderItem({ folder }: { folder: Folder }) {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button size="icon" variant="ghost" {...listeners} {...attributes}>
-          <GripVertical size="18" />
-        </Button>
       </Link>
-    </span>
+    </div>
   );
 }

@@ -1,5 +1,7 @@
 import { BookmarkItem } from '@/components/BookmarkItem';
 import { Debug } from '@/components/Debug';
+import { FolderItem } from '@/components/FolderItem';
+import { MainLayout } from '@/components/layout/MainLayout';
 import { useMainStore } from '@/stores/bookmarks';
 import { useLocation, useParams } from 'react-router-dom';
 
@@ -16,9 +18,9 @@ export function ViewFolder() {
   if (!folder) return null;
 
   return (
-    <div>
+    <MainLayout>
       <input
-        className="text-xl px-3 py-2"
+        className="text-sm px-3 py-2 bg-slate-100"
         type="text"
         name="title"
         id="title"
@@ -31,11 +33,17 @@ export function ViewFolder() {
         }
       />
 
+      {store.getFoldersByFolderId(id).map((f) => (
+        <div>
+          <FolderItem folder={f} />
+        </div>
+      ))}
+
       {bookmarks.map((bookmark) => (
         <div>
           <BookmarkItem bookmark={bookmark} />
         </div>
       ))}
-    </div>
+    </MainLayout>
   );
 }

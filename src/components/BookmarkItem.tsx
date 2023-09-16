@@ -50,15 +50,28 @@ export function BookmarkItem({ bookmark }: { bookmark: Bookmark }) {
     <div
       style={style}
       ref={setNodeRef}
-      className="group flex py-1 hover:bg-slate-50 px-3 text-left"
+      className="group flex py-1 hover:bg-slate-50/90 text-left pr-2"
     >
-      <button type="button" className="flex text-left flex-grow">
-        <div className="pt-0.5 min-w-fit">
+      <button
+        type="button"
+        className="opacity-0 group-hover:opacity-100 text-slate-400 flex items-center transition-opacity
+        cursor-move"
+        {...listeners}
+        {...attributes}
+      >
+        <GripVertical size="18" />
+      </button>
+      <Link
+        to={bookmark.url}
+        target="_blank"
+        className="flex text-left flex-grow items-center"
+      >
+        <div className="min-w-fit">
           <img
-            width="24"
-            height="24"
+            width="28"
+            height="28"
             alt=""
-            className="inline-block mr-2 rounded-full"
+            className="w-7 h-7 inline-block mr-2 rounded-full"
             src={getFaviconURL(bookmark.url)}
           />
         </div>
@@ -68,7 +81,7 @@ export function BookmarkItem({ bookmark }: { bookmark: Bookmark }) {
             {prettyURL(bookmark.url)}
           </span>
         </div>
-      </button>
+      </Link>
       <div className="ml-auto flex items-center opacity-0 group-hover:opacity-100 transition-opacity text-slate-400">
         <DropdownMenu>
           <DropdownMenuTrigger
@@ -88,10 +101,6 @@ export function BookmarkItem({ bookmark }: { bookmark: Bookmark }) {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-
-        <Button size="icon" variant="ghost" {...listeners} {...attributes}>
-          <GripVertical size="18" />
-        </Button>
       </div>
     </div>
   );

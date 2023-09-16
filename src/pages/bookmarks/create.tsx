@@ -3,7 +3,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { createId, getFaviconURL, getTitleFromURL, isURL } from '@/lib/utils';
 import { useMainStore } from '@/stores/bookmarks';
-import { Loader } from 'lucide-react';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -59,13 +58,13 @@ export function CreateBookmark() {
               className="w-8 h-8 inline-block mr-2"
             />
           ) : (
-            <Loader className="w-12 h-12 animate-spin rounded-full inline-block mr-2" />
+            <div className="h-8 w-8 bg-slate-300 rounded-lg mr-2" />
           )}
         </div>
         <div>
           <Label htmlFor="url">URL</Label>
           <Input
-            value={store.pastedURL || ''}
+            value={url}
             id="url"
             onChange={(e) => setURL(e.target.value)}
             placeholder="https://example.com"

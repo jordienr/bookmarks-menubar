@@ -9,6 +9,7 @@ export type Bookmark = {
   url: string;
   folderId?: UniqueId;
   order: number;
+  createdAt: number;
 };
 
 export type Folder = {
@@ -16,18 +17,21 @@ export type Folder = {
   title: string;
   parentFolderId?: UniqueId;
   order: number;
+  createdAt: number;
 };
 
 interface MainStore {
   bookmarks: Bookmark[];
   folders: Folder[];
   createFolder: (f: Folder) => void;
-  getFolderById: (id: string) => Folder | undefined;
+  getFolderById: (id: UniqueId) => Folder | undefined;
   updateFolder: (f: Folder) => void;
   removeFolder: (f: Folder) => void;
   pastedURL?: string;
   getOrphanBookmarks: () => Bookmark[];
-  getBookmarksByFolderId: (folderId: string) => Bookmark[];
+  getOrphanFolders: () => Folder[];
+  getBookmarksByFolderId: (folderId: UniqueId) => Bookmark[];
+  getFoldersByFolderId: (folderId: UniqueId) => Folder[];
   setPastedURL: (url: string) => void;
   addBookmark: (b: Bookmark) => void;
   removeBookmark: (b: Bookmark) => void;
@@ -68,8 +72,14 @@ export const useMainStore = create<MainStore>()(
       getOrphanBookmarks: () => {
         return get().bookmarks.filter((b) => !b.folderId);
       },
+      getOrphanFolders: () => {
+        return get().folders.filter((f) => !f.parentFolderId);
+      },
       getBookmarksByFolderId: (folderId) => {
         return get().bookmarks.filter((b) => b.folderId === folderId);
+      },
+      getFoldersByFolderId: (folderId) => {
+        return get().folders.filter((f) => f.parentFolderId === folderId);
       },
       createFolder: (f) => {
         set((state) => ({

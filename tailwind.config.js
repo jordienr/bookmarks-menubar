@@ -16,6 +16,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        mono: ['JetBrains Mono', 'SF Mono', 'monospace'],
+      },
       keyframes: {
         'accordion-down': {
           from: { height: 0 },

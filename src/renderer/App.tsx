@@ -13,7 +13,8 @@ import 'tailwindcss/tailwind.css';
 import { EditFolder } from '@/pages/folders/edit';
 import { ViewFolder } from '@/pages/folders/view';
 import { DeleteFolder } from '@/pages/folders/delete';
-import { DndContext } from '@dnd-kit/core';
+import { DndContext, DragEndEvent } from '@dnd-kit/core';
+import { useMainStore } from '@/stores/bookmarks';
 
 export default function App() {
   const queryClient = new QueryClient({
@@ -24,9 +25,44 @@ export default function App() {
     },
   });
 
+  const store = useMainStore();
+
+  function onDragEnd(e: DragEndEvent) {
+    console.log(e.active.data);
+    const isFolder = e.active.data.current?.type === 'folder';
+    const isBookmark = e.active.data.current?.type === 'bookmark';
+    if (isBookmark) {
+      console.log('bookmark');
+      const bookmarkId = e.active.id;
+      const folderId = e.over?.id;
+
+      if (!bookmarkId || !folderId) {
+        console.log('no bookmark or folder id');
+        return;
+      }
+
+      const bookmark = store.bookmarks.find((b) => b.id === bookmarkId);
+
+      if (!bookmark) {
+        console.log('no bookmark found');
+        return;
+      }
+
+      store.updateBookmark({
+        ...bookmark,
+        folderId,
+      });
+
+      return;
+    }
+    if (isFolder) {
+      console.log('folder');
+    }
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
-      <DndContext>
+      <DndContext onDragEnd={(e) => onDragEnd(e)}>
         <Toaster />
         <Router>
           <Routes>

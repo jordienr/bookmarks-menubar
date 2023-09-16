@@ -1,18 +1,20 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+type UniqueId = string | number;
+
 export type Bookmark = {
-  id: string;
+  id: UniqueId;
   title: string;
   url: string;
-  folderId?: string;
+  folderId?: UniqueId;
   order: number;
 };
 
 export type Folder = {
-  id: string;
+  id: UniqueId;
   title: string;
-  parentFolderId?: string;
+  parentFolderId?: UniqueId;
   order: number;
 };
 
@@ -29,6 +31,7 @@ interface MainStore {
   setPastedURL: (url: string) => void;
   addBookmark: (b: Bookmark) => void;
   removeBookmark: (b: Bookmark) => void;
+  updateBookmark: (b: Bookmark) => void;
 }
 
 export const useMainStore = create<MainStore>()(
@@ -40,6 +43,16 @@ export const useMainStore = create<MainStore>()(
       setPastedURL: (url) => {
         set(() => ({
           pastedURL: url,
+        }));
+      },
+      updateBookmark: (b) => {
+        set((state) => ({
+          bookmarks: state.bookmarks.map((bookmark) => {
+            if (bookmark.id === b.id) {
+              return b;
+            }
+            return bookmark;
+          }),
         }));
       },
       addBookmark: (b) => {

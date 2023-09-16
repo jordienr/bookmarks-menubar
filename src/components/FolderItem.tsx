@@ -48,11 +48,9 @@ export function FolderItem({ folder }: { folder: Folder }) {
   };
 
   return (
-    <span ref={setDroppableRef} onDrop={(e) => console.log(e)}>
+    <span ref={setDroppableRef}>
       <Link
         ref={setNodeRef}
-        {...listeners}
-        {...attributes}
         to={`/folders/${folder.id}`}
         style={style}
         key={folder.id}
@@ -83,7 +81,7 @@ export function FolderItem({ folder }: { folder: Folder }) {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button size="icon" variant="ghost">
+        <Button size="icon" variant="ghost" {...listeners} {...attributes}>
           <GripVertical size="18" />
         </Button>
       </Link>

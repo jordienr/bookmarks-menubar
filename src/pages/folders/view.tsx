@@ -1,3 +1,5 @@
+import { BookmarkItem } from '@/components/BookmarkItem';
+import { Debug } from '@/components/Debug';
 import { useMainStore } from '@/stores/bookmarks';
 import { useLocation, useParams } from 'react-router-dom';
 
@@ -9,6 +11,7 @@ export function ViewFolder() {
   if (!id) return null;
 
   const folder = store.getFolderById(id);
+  const bookmarks = store.getBookmarksByFolderId(id);
 
   if (!folder) return null;
 
@@ -28,8 +31,10 @@ export function ViewFolder() {
         }
       />
 
-      {store.getBookmarksByFolderId(id).map((bookmark) => (
-        <div>{bookmark.title}</div>
+      {bookmarks.map((bookmark) => (
+        <div>
+          <BookmarkItem bookmark={bookmark} />
+        </div>
       ))}
     </div>
   );

@@ -48,10 +48,7 @@ export function FolderItem({ folder }: { folder: Folder }) {
   };
 
   return (
-    <div
-      className="group flex items-center pr-2 py-1 hover:bg-slate-50/90"
-      ref={setDroppableRef}
-    >
+    <div className="group flex items-center pr-2 py-1" ref={setDroppableRef}>
       <button
         type="button"
         className="text-slate-400 cursor-move opacity-0 group-hover:opacity-100 transition-opacity"
@@ -68,7 +65,7 @@ export function FolderItem({ folder }: { folder: Folder }) {
         key={folder.id}
         className="flex items-center w-full"
       >
-        <div className="mr-2 h-7 w-7 rounded-full text-yellow-500 flex items-center justify-center">
+        <div className="mr-2 h-7 w-7 rounded-full text-yellow-500 group-hover:bg-yellow-100 flex items-center justify-center">
           <FolderIcon size="18" />
         </div>
         <div>

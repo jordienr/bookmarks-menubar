@@ -20,7 +20,7 @@ export function ViewFolder() {
   return (
     <MainLayout>
       <input
-        className="text-sm px-3 py-2 bg-slate-100"
+        className="text-lg px-3 py-2 w-full font-medium"
         type="text"
         name="title"
         id="title"

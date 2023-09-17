@@ -76,7 +76,7 @@ export function BookmarkItem({ bookmark }: { bookmark: Bookmark }) {
           />
         </div>
         <div className="flex flex-col flex-grow">
-          <span>{bookmark.title}</span>
+          <span className="font-medium">{bookmark.title}</span>
           <span className="text-xs tracking-tighter text-ellipsis truncate max-w-[320px] font-mono text-gray-400">
             {prettyURL(bookmark.url)}
           </span>

@@ -88,8 +88,8 @@ export function MainLayout({
       ) : (
         <>
           {/* <Debug data={location} /> */}
-          <header className="flex justify-between items-center border-b">
-            <ul className="px-2 py-1 text-sm flex items-center">
+          <header className="relative flex justify-between items-center border-b">
+            <ul className="text-sm flex items-center flex-grow">
               {/* <li>
                 <Button
                   className="text-slate-400"
@@ -100,7 +100,7 @@ export function MainLayout({
                   <CornerUpLeft size="18" />
                 </Button>
               </li> */}
-              <li>
+              <li className="p-1">
                 <Button
                   className="text-slate-400"
                   size="icon"
@@ -117,11 +117,10 @@ export function MainLayout({
               )}
               {parentFolder && (
                 <div className="flex items-center">
-                  <ChevronRight size="12" />
                   <CrumbItem to={`/folders/${parentFolder.id}`}>
                     {parentFolder.title}
                   </CrumbItem>
-                  <ChevronRight size="12" />
+                  <ChevronRight size="12" className="text-slate-400/80" />
                 </div>
               )}
               {currentFolder && (
@@ -129,9 +128,10 @@ export function MainLayout({
                   {currentFolder.title}
                 </CrumbItem>
               )}
+              <div className="flex-1 h-10 draggable-area" />
             </ul>
 
-            <div className="pr-1 py-1 flex gap-1 text-slate-400">
+            <div className="p-1 flex gap-1 text-slate-400">
               <Button
                 onClick={() => createFolder()}
                 variant="ghost"
@@ -139,7 +139,7 @@ export function MainLayout({
               >
                 <FolderPlus size="18" />
               </Button>
-              <Button asChild variant="ghost" size="icon">
+              <Button asChild variant="default" size="icon">
                 <Link to="/bookmarks/create">
                   <Plus size="18" />
                 </Link>

@@ -80,7 +80,6 @@ const createWindow = async () => {
   }
 
   mainWindow = new BrowserWindow({
-    autoHideMenuBar: true,
     show: true,
     width: 420, // u know it
     height: 600,
@@ -143,7 +142,7 @@ app.on('window-all-closed', () => {
 app
   .whenReady()
   .then(() => {
-    app.dock.hide();
+    // app.dock.hide();
     const icon = getAssetPath('icons/iconTemplate.png');
     tray = new Tray(icon);
     tray.on('click', () => {

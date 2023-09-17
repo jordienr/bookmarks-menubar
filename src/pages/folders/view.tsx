@@ -20,7 +20,7 @@ export function ViewFolder() {
   return (
     <MainLayout>
       <input
-        className="text-lg px-3 py-2 w-full font-medium"
+        className="text-lg px-3 py-2 w-full font-medium hover:bg-slate-50"
         type="text"
         name="title"
         id="title"
@@ -34,13 +34,13 @@ export function ViewFolder() {
       />
 
       {store.getFoldersByFolderId(id).map((f) => (
-        <div>
+        <div key={`fv${f.id}`}>
           <FolderItem folder={f} />
         </div>
       ))}
 
       {bookmarks.map((bookmark) => (
-        <div>
+        <div key={`fv${bookmark.id}`}>
           <BookmarkItem bookmark={bookmark} />
         </div>
       ))}

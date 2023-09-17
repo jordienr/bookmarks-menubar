@@ -9,7 +9,7 @@ export type Bookmark = {
   url: string;
   folderId?: UniqueId;
   order: number;
-  createdAt: number;
+  createdAt?: number;
 };
 
 export type Folder = {
@@ -17,7 +17,7 @@ export type Folder = {
   title: string;
   parentFolderId?: UniqueId;
   order: number;
-  createdAt: number;
+  createdAt?: number;
 };
 
 interface MainStore {
@@ -45,7 +45,7 @@ export const useMainStore = create<MainStore>()(
       folders: [],
       pastedURL: undefined,
       setPastedURL: (url) => {
-        set(() => ({
+        set((state) => ({
           pastedURL: url,
         }));
       },
@@ -61,7 +61,7 @@ export const useMainStore = create<MainStore>()(
       },
       addBookmark: (b) => {
         set((state) => ({
-          bookmarks: [...state.bookmarks, b],
+          bookmarks: [...state.bookmarks, { ...b, createdAt: Date.now() }],
         }));
       },
       removeBookmark: (b) => {
@@ -83,7 +83,7 @@ export const useMainStore = create<MainStore>()(
       },
       createFolder: (f) => {
         set((state) => ({
-          folders: [...state.folders, f],
+          folders: [...state.folders, { ...f, createdAt: Date.now() }],
         }));
       },
       getFolderById: (id) => {

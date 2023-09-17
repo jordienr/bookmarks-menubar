@@ -18,14 +18,20 @@ export function isURL(str: string) {
     const _ = new URL(str);
     return true;
   } catch {
+    console.log('isURL: not a url');
     return false;
   }
 }
 
 export function getFaviconURL(url: string) {
-  const { host } = new URL(url);
-  const faviconURL = `https://api.faviconkit.com/${host}/144`;
-  return faviconURL;
+  try {
+    const { host } = new URL(url);
+    const faviconURL = `https://api.faviconkit.com/${host}/144`;
+    return faviconURL;
+  } catch (error) {
+    console.error('getFaviconURL: error', error);
+    return '';
+  }
 }
 
 export function getTitleFromURL(url: string) {
@@ -38,6 +44,11 @@ export function getTitleFromURL(url: string) {
 }
 
 export function prettyURL(url: string) {
-  const { host } = new URL(url);
-  return host;
+  try {
+    const { host } = new URL(url);
+    return host;
+  } catch (error) {
+    console.error('prettyURL: error', error);
+    return url;
+  }
 }

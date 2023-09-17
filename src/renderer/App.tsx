@@ -70,7 +70,6 @@ export default function App() {
             <Route path="bookmarks" element={<Start />}>
               <Route path=":id/edit" element={<EditBookmark />} />
             </Route>
-            <Route path="bookmarks/create" element={<CreateBookmark />} />
             <Route path="folders/:id" element={<ViewFolder />} />
             <Route path="folders/:id/edit" element={<EditFolder />} />
             <Route path="folders/:id/delete" element={<DeleteFolder />} />

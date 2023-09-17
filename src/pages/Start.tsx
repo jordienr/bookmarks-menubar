@@ -11,29 +11,6 @@ import { MainLayout } from '@/components/layout/MainLayout';
 
 export function Start() {
   const store = useMainStore();
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    console.log(window);
-
-    // on cmd v
-
-    window.addEventListener('paste', (e) => {
-      const text = e.clipboardData?.getData('text/plain');
-
-      if (!text) return;
-
-      if (isURL(text)) {
-        store.setPastedURL(text);
-        navigate('/bookmarks/create');
-      } else {
-        console.log('not a url');
-      }
-    });
-
-    return window.removeEventListener('paste', () => {});
-  }, [navigate, store]);
 
   return (
     <MainLayout>

@@ -18,7 +18,6 @@ export function isURL(str: string) {
     const _ = new URL(str);
     return true;
   } catch {
-    console.log('isURL: not a url');
     return false;
   }
 }

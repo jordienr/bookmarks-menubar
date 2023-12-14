@@ -51,13 +51,13 @@ export function CreateBookmark({
   }
 
   useEffect(() => {
-    // if (store.pastedURL?.url) {
-    //   setURL(store.pastedURL.url);
-    //   setTitle(getTitleFromURL(store.pastedURL.url) || '');
-    //   setSelectedFolder(store.getFolderById(store.pastedURL.folderId || ''));
-    //   toast.success('Bookmark pasted successfully!');
-    //   // store.setPastedURL({ url: '' });
-    // }
+    if (store.pastedURL) {
+      setURL(store.pastedURL);
+      setTitle(getTitleFromURL(store.pastedURL) || '');
+
+      toast.success('Bookmark pasted successfully!');
+      // store.setPastedURL({ url: '' });
+    }
   }, [store.pastedURL, store]);
 
   useEffect(() => {

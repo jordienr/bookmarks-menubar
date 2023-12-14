@@ -151,12 +151,12 @@ app
       // Set position to wherever the tray icon is
       const trayBounds = tray.getBounds();
       const windowBounds = mainWindow?.getBounds();
-      if (windowBounds) {
-        mainWindow?.setPosition(
-          trayBounds.x - windowBounds.width / 2 + trayBounds.width / 2,
-          trayBounds.y
-        );
-      }
+      // if (windowBounds) {
+      //   mainWindow?.setPosition(
+      //     trayBounds.x - windowBounds.width / 2 + trayBounds.width / 2,
+      //     trayBounds.y
+      //   );
+      // }
 
       // on click outside, hide window
       mainWindow?.once('blur', () => {
@@ -171,7 +171,7 @@ app
             label: 'Show',
             click: () => {
               mainWindow?.show();
-              mainWindow?.setPosition(0, 0);
+              // mainWindow?.setPosition(0, 0);
             },
           },
           {
@@ -180,28 +180,9 @@ app
               app.quit();
             },
           },
-          {
-            label: 'Paste',
-            accelerator: 'CommandOrControl+V',
-            click: () => {
-              const clipboardText = clipboard.readText();
-              mainWindow?.webContents.send('paste', clipboardText);
-              console.log('Pasted: ', clipboardText);
-            },
-          },
         ])
       );
-
-      // Handle paste event
     });
-
-    // ipcMain.on('paste', (event) => {
-    //   console.log(event);
-
-    //   const clipboardText = clipboard.readText();
-    //   mainWindow?.webContents.send('paste', clipboardText);
-    //   console.log('Pasted: ', clipboardText);
-    // });
 
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the

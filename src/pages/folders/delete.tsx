@@ -20,15 +20,24 @@ export function DeleteFolder() {
     navigate('/');
   }
 
+  function onDelete() {
+    store.removeFolder(currentFolder!);
+    navigate('/');
+  }
+
   return (
     <div className="py-32 text-center flex flex-col">
       <h1 className="text-lg font-medium">
         The folder {currentFolder?.title} has {currentFolderItems.length} items
       </h1>
       <p>Are you sure you want to delete it?</p>
-      <div className="px-8 flex flex-col gap-1 mt-8">
-        <Button variant="ghost">No, cancel</Button>
-        <Button variant="destructive">Yes, delete</Button>
+      <div className="px-8 flex flex-col gap-2 mt-8">
+        <Button variant="ghost" onClick={() => navigate(-1)}>
+          No, cancel
+        </Button>
+        <Button variant="destructive" onClick={onDelete}>
+          Yes, delete
+        </Button>
       </div>
     </div>
   );

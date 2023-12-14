@@ -34,13 +34,13 @@ export function ViewFolder() {
       />
 
       {store.getFoldersByFolderId(id).map((f) => (
-        <div key={`fv${f.id}`}>
+        <div key={`folders${id}${f.id}`}>
           <FolderItem folder={f} />
         </div>
       ))}
 
       {bookmarks.map((bookmark) => (
-        <div key={`fv${bookmark.id}`}>
+        <div key={`bookmarks${bookmark.id}`}>
           <BookmarkItem bookmark={bookmark} />
         </div>
       ))}

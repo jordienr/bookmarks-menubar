@@ -24,7 +24,7 @@ export function FolderItem({ folder }: { folder: Folder }) {
   });
 
   const isOverStyle = isOver
-    ? { backgroundColor: '#f3f3f3', outline: '1px solid #f3f3f3' }
+    ? { backgroundColor: '#f1f1f1', outline: '1px solid #3b82f6' }
     : undefined;
 
   const transformStyle = transform
@@ -62,7 +62,7 @@ export function FolderItem({ folder }: { folder: Folder }) {
         ref={setNodeRef}
         to={`/folders/${folder.id}`}
         style={style}
-        key={folder.id}
+        key={`folder${folder.id}`}
         className="flex items-center w-full"
       >
         <div className="mr-2 h-7 w-7 rounded-full text-yellow-500 group-hover:bg-yellow-100 flex items-center justify-center">
